@@ -2,6 +2,7 @@ import csv
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+from matplotlib.ticker import MultipleLocator, AutoMinorLocator
 import matplotlib as mpl
 
 def generate_latex_table(data):
@@ -49,7 +50,7 @@ def read_csv_file(file_name):
             data.append(row_data)
     return data
 
-def plot_data(data, file_name, data2=None, plot_fit=True, get_pdf=True, scale_x="linear", scale_y="linear", error_bars=False, error_bars_data=None, lable_x="Zeit in s", lable_y="Abstand in m", slope=None, intercept=None, std_err=None, lable_daten="Datenwerte", lable_fit="Fit zu den Datenwerten"):
+def plot_data(data, file_name, data2=None, plot_fit=True, get_pdf=True, scale_x="linear", scale_y="linear", error_bars=False, error_bars_data=None, lable_x="Zeit in s", lable_y="Abstand in m", slope=None, intercept=None, std_err=None, lable_daten="Datenwerte", lable_fit="Fit zu den Datenwerten", skal=1):
     data = np.array(data)
     if data2 is not None:
         data2 = np.array(data2)
@@ -83,7 +84,16 @@ def plot_data(data, file_name, data2=None, plot_fit=True, get_pdf=True, scale_x=
     ax.set_xlabel(lable_x)
     ax.set_ylabel(lable_y)
     ax.legend()
-    ax.grid()
+
+    # Set major ticks locator
+    ax.xaxis.set_major_locator(MultipleLocator(1))
+    ax.yaxis.set_major_locator(MultipleLocator(skal))
+
+    # Set minor ticks locator
+    ax.xaxis.set_minor_locator(AutoMinorLocator(4))  # 4 minor ticks per major tick
+    ax.yaxis.set_minor_locator(AutoMinorLocator(5))  # 5 minor ticks per major tick
+
+    ax.grid('minor')
     fig.show()
     if get_pdf:
         if not os.path.isdir(f"../Graphics/{file_name}.pdf"):
