@@ -24,7 +24,8 @@ print("-----------Initial the constants-----------")
 #precalculation of the values
 temperature = 24.5 # °C
 pressure_orignal_air = 722 # mmHg
-pressure_air = pressure_orignal_air * 7,5006* 10**(-3) # Pa
+pressure_air = pressure_orignal_air * 133.322 # Pa
+print("pressure_air: ", pressure_air)
 
 density_air = 1.225 # kg/m^3
 density_oel = 871 # kg/m^3
