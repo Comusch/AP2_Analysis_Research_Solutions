@@ -85,13 +85,14 @@ def plot_data(data, file_name, data2=None, plot_fit=True, get_pdf=True, scale_x=
     ax.set_ylabel(lable_y)
     ax.legend()
 
-    # Set major ticks locator
-    ax.xaxis.set_major_locator(MultipleLocator(1))
-    ax.yaxis.set_major_locator(MultipleLocator(skal))
+    if skal != 1:
+        # Set major ticks locator
+        ax.xaxis.set_major_locator(MultipleLocator(1))
+        ax.yaxis.set_major_locator(MultipleLocator(skal))
 
-    # Set minor ticks locator
-    ax.xaxis.set_minor_locator(AutoMinorLocator(4))  # 4 minor ticks per major tick
-    ax.yaxis.set_minor_locator(AutoMinorLocator(5))  # 5 minor ticks per major tick
+        # Set minor ticks locator
+        ax.xaxis.set_minor_locator(AutoMinorLocator(4))  # 4 minor ticks per major tick
+        ax.yaxis.set_minor_locator(AutoMinorLocator(5))  # 5 minor ticks per major tick
 
     ax.grid('minor')
     fig.show()
