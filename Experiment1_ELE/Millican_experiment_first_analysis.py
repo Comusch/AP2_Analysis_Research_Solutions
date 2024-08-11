@@ -222,6 +222,8 @@ plt.scatter(end[:, 0], end[:, 1], c=labels, cmap='rainbow')
 plt.xlabel('Index')
 plt.ylabel('Charge in 10⁻19')
 plt.title('Cluster der geclusterten Daten')
+plt.grid()
+plt.savefig('../Graphics/Cluster.pdf')
 plt.show()
 
 data_clustered = []
