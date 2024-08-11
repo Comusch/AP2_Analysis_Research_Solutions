@@ -1,6 +1,7 @@
 import Analysistools as an
 import numpy as np
 import matplotlib.pyplot as plt
+import BRU_Aufgabe9 as a9
 
 # Load the data
 print("--------------BRU Experiment 4--------------")
@@ -107,32 +108,29 @@ print(data_resistance_power_r50)
 
 print("-----------Plott the I-R diagram-----------")
 # Plott the I-R diagram
-I_R_10 = []
-P_R_10 = []
+I_R = []
+P_R = []
 for set in data_resistance_power_r10:
-    I_R_10.append((set[0], set[2]))
-    P_R_10.append((set[0], set[4]))
+    I_R.append((set[0], set[2]))
+    P_R.append((set[0], set[4]))
 
-an.plot_data(I_R_10, "I-R diagram with resistances 10", lable_x="I[A]", lable_y="R[Ohm]", plot_fit=False)
-an.plot_data(P_R_10, "P-R diagram with resistances 10", lable_x="P[W]", lable_y="R[Ohm]", plot_fit=False)
-
-I_R_30 = []
-P_R_30 = []
 for set in data_resistance_power_r30:
-    I_R_30.append((set[0], set[2]))
-    P_R_30.append((set[0], set[4]))
+    I_R.append((set[0], set[2]))
+    P_R.append((set[0], set[4]))
 
-an.plot_data(I_R_30, "I-R diagram with resistances 30", lable_x="I[A]", lable_y="R[Ohm]", plot_fit=False)
-an.plot_data(P_R_30, "P-R diagram with resistances 30", lable_x="P[W]", lable_y="R[Ohm]", plot_fit=False)
-
-I_R_50 = []
-P_R_50 = []
 for set in data_resistance_power_r50:
-    I_R_50.append((set[0], set[2]))
-    P_R_50.append((set[0], set[4]))
+    I_R.append((set[0], set[2]))
+    P_R.append((set[0], set[4]))
 
-an.plot_data(I_R_50, "I-R diagram with resistances 200", lable_x="I[A]", lable_y="R[Ohm]", plot_fit=False)
-an.plot_data(P_R_50, "P-R diagram with resistances 200", lable_x="P[W]", lable_y="R[Ohm]", plot_fit=False)
+data_resistance_power_aufgabe2 = a9.Aufgabe2_start()
+for set in data_resistance_power_aufgabe2:
+    I_R.append((set[2], set[4]))
+    P_R.append((set[2], set[8]))
+
+
+
+an.plot_data(I_R, "I-R diagram", lable_x="R [Ohm]", lable_y="I [A]", plot_fit=False)
+an.plot_data(P_R, "P-R diagram", lable_x="R [Ohm]", lable_y="P [W]", plot_fit=False, scale_y="log", scale_x="log")
 
 
 
