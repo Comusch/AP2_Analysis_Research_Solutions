@@ -2,6 +2,7 @@ import Analysistools as an
 import numpy as np
 import matplotlib.pyplot as plt
 import BRU_Aufgabe9 as a9
+from scipy.stats import linregress
 
 # Load the data
 print("--------------BRU Experiment 4--------------")
@@ -127,10 +128,28 @@ for set in data_resistance_power_aufgabe2:
     I_R.append((set[2], set[4]))
     P_R.append((set[2], set[8]))
 
+x = np.array(I_R)[:,0]
+y = np.array(I_R)[:, 1]
 
+slope, intercept, r_value, p_value, std_err = linregress(x, y)
+print(f"R: {slope} +- {std_err}")
+R_plot = np.linspace(0, 18, 100)
+data_fit_I_R = []
+for r in R_plot:
+    data_fit_I_R.append((r, slope*r+intercept))
 
-an.plot_data(I_R, "I-R diagram", lable_x="R [Ohm]", lable_y="I [A]", plot_fit=False)
-an.plot_data(P_R, "P-R diagram", lable_x="R [Ohm]", lable_y="P [W]", plot_fit=False, scale_y="log", scale_x="log")
+x2 = np.array(P_R)[:,0]
+y2 = np.array(P_R)[:, 1]
+
+slope2, intercept2, r_value2, p_value2, std_err2 = linregress(x2, y2)
+print(f"P: {slope2} +- {std_err2}")
+P_plot = np.linspace(0, 18, 100)
+data_fit_P_R = []
+for r in P_plot:
+    data_fit_P_R.append((r, slope2*r+intercept2))
+
+an.plot_data(I_R, data2= data_fit_I_R,file_name="I-R diagram", lable_x="R [Ohm]", lable_y="I [A]", plot_fit=False)
+an.plot_data(P_R, data2=data_fit_P_R, file_name="P-R diagram", lable_x="R [Ohm]", lable_y="P [W]", plot_fit=False, scale_y="log", scale_x="log")
 
 
 

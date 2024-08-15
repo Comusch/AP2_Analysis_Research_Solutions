@@ -9,8 +9,8 @@ A = 3.16
 u_A = 0.01
 c2 = 1*(10**-6) # F
 u_c2 = 0.05 *c2
-w = 1000 # Hz
-u_w = 0.1
+w = 1000 *2*np.pi# Hz
+u_w = 0.1 *np.pi
 
 print("Calculate the capacity of the second condensator")
 

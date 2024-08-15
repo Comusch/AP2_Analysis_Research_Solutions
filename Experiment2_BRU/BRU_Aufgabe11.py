@@ -35,6 +35,6 @@ for set in data_orignal2:
     inductance = set[1]/(10-set[1])*l1
     u_inductance = np.sqrt((u_l1*set[1]/(10-set[1]))**2 + (set[0]*10/(10-set[1])**2*u_A)**2)
     data_inductance2.append((set[0], set[1], inductance, u_inductance))
-    print(f"L: {inductance} +- {u_inductance}, with R: {set[0]} and A: {set[1]}")
+    print(f"L: {inductance} +- {u_inductance}, with L: {set[0]} and A: {set[1]}")
     print(f"Relation of the inductance: {inductance/data_orignal[0][0]}")
     print("---------------")

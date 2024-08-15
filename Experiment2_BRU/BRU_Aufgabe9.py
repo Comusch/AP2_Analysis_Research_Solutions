@@ -15,7 +15,7 @@ def Aufgabe2_start():
     u_A = 0.01  # absolute uncertainty of the relationship of the resistance
 
     U = 1  # Voltage
-    u_U = 0.01  # absolute uncertainty of the voltage
+    u_U = 0.1  # absolute uncertainty of the voltage
 
     # Calculate the resistance
     print("-----------Calculate the resistance-----------")
