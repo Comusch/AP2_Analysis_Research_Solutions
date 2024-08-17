@@ -151,8 +151,11 @@ u_d_s = 0.001 #m
 V_schlauch = (d_s/2)**2 * np.pi * l_s
 u_V_schlauch = np.sqrt((d_s *np.pi * l_s * u_d_s)**2 + ((d_s/2)**2 * np.pi * u_l_s)**2)
 
-s_eff_schlauch_1 = slope3 * V_schlauch *(-1) *60*60
-s_eff_schlauch_2 = slope3_2 * V_schlauch *(-1) *60*60
+V = 3*10**-3 #m³
+u_V = 0.1*10**-3 #m³
+
+s_eff_schlauch_1 = slope3 * V *(-1) *60*60
+s_eff_schlauch_2 = slope3_2 * V *(-1) *60*60
 print(f"S_eff Schlauch molekular (m³/h): {s_eff_schlauch_1}")
 print(f"S_eff Schlauch viskoser (m³/h): {s_eff_schlauch_2}")
 
@@ -166,8 +169,8 @@ u_d_k = 0.0001 #m
 V_k = (d_k/2)**2 * np.pi * l_k
 u_V_k = np.sqrt((d_k *np.pi * l_k * u_d_k)**2 + ((d_k/2)**2 * np.pi * u_l_k)**2)
 
-s_eff_k_1 = slope1 * V_k *(-1) *60*60
-s_eff_k_2 = slope1_2 * V_k *(-1) *60*60
+s_eff_k_1 = slope1 * V *(-1) *60*60
+s_eff_k_2 = slope1_2 * V *(-1) *60*60
 print(f"S_eff Capillaren molekular (m³/h): {s_eff_k_1}")
 print(f"S_eff Capillaren viskoser (m³/h): {s_eff_k_2}")
 

@@ -74,6 +74,11 @@ u_t1 = standard_deviation_t1*t_uncertainty/np.sqrt(n1)
 u_t2 = standard_deviation_t2*t_uncertainty/np.sqrt(n2)
 u_t3 = standard_deviation_t3*t_uncertainty/np.sqrt(n3)
 
+print("-----------Average time-----------")
+print(f"Average time for 5.3*10^1 Pa: {average_t1}+-{u_t1}")
+print(f"Average time for 9*10^1 Pa: {average_t2}+-{u_t2}")
+print(f"Average time for 1.5*10^2 Pa: {average_t3}+-{u_t3}")
+
 data_prepared = [(5.3*10**1, average_t1, u_t1), (9*10**1, average_t2, u_t2), (1.5*10**2, average_t3, u_t3)]
 
 data_saugvermoegen = []
@@ -83,4 +88,13 @@ for set in data_prepared:
     data_saugvermoegen.append((saugvermoegen, u_saugvermoegen))
     print(f"Saugvermögen: {saugvermoegen}+-{u_saugvermoegen}")
 print(data_saugvermoegen)
+
+saugvermoegen_average = 0
+u_saugvermoegen_average = 0
+for set in data_saugvermoegen:
+    saugvermoegen_average += set[0]
+    u_saugvermoegen_average += set[1]**2
+saugvermoegen_average = saugvermoegen_average/3
+u_saugvermoegen_average = u_saugvermoegen_average/3
+print(f"Saugvermögen average: {saugvermoegen_average}+-{np.sqrt(u_saugvermoegen_average)}")
 

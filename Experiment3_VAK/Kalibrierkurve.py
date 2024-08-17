@@ -81,7 +81,7 @@ print("-----------Calculation of the Power of the resistance-----------")
 R = 6.4 # Resistance Ohm
 u_R = 0.01 # Ohm
 
-u_I = 0.1 # A
+u_I = c # A
 
 data_Power_pressure = []
 error_bars_Power_pressure = []
