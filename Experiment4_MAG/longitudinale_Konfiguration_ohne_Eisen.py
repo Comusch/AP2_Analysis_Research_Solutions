@@ -82,7 +82,7 @@ print(f"Grenze Spule: {grenze_spule}")
 
 print("-----------fit the data-----------")
 #fit the data
-x_fit_data = np.linspace(-40, 40, 200)
+x_fit_data_r = np.linspace(-40, 40, 200)
 
 #fit the data
 popt, pcov = curve_fit(Bx, [x[0] for x in data_1_gesamt], [x[1] for x in data_1_gesamt], p0=[0.8, 3.7])
@@ -98,17 +98,24 @@ print(f"B_max: {Bx(I_eff, R_eff, 0)}")
 x_max_negativ = -x_from_Bx(I_eff, R_eff, (15.47-0.0645))
 x_max_positiv = x_from_Bx(I_eff, R_eff, (15.47-0.060))
 
-data_grenzen = [(x_max_negativ, 0), (x_max_positiv, 0)]
+#data_grenzen = [(x_max_negativ, 0), (x_max_positiv, 0)]
 
 print(f"x_max_negativ: {x_max_negativ}")
 print(f"x_max_positiv: {x_max_positiv}")
+
+x_fit_data = []
+for set in x_fit_data_r:
+    if set < -3.7 or set > 3.7:
+        x_fit_data.append(set)
 
 y_fit_data = [Bx(I_eff, R_eff, x) for x in x_fit_data]
 
 print("------------plot data------------")
 fig, ax = plt.subplots(figsize=(8, 8))
 
-plt.plot([x[0] for x in data_grenzen], [x[1] for x in data_grenzen], 'o', color="red", label="Grenzen des konst. Maximums")
+plt.axvline(-3.7, color="red")
+plt.axvline(3.7, color="red")
+#plt.plot([x[0] for x in data_grenzen], [x[1] for x in data_grenzen], 'o', color="red", label="Grenzen des konst. Maximums")
 plt.errorbar([x[0] for x in data_1_Feld], [x[1] for x in data_1_Feld], yerr= error_y_1_Feld, xerr=error_x_1_Feld, fmt='o', label="Magnetfeld")
 plt.errorbar([x[0] for x in data_1_grund], [x[1] for x in data_1_grund], yerr= error_y_1_grund, xerr=error_x_1_grund, fmt='o', label="Untergrundmessung")
 plt.errorbar([x[0] for x in data_1_gesamt], [x[1] for x in data_1_gesamt], yerr=error_y_1_gesamt, xerr= error_x_1_gesamt,fmt='o', label="Gesamtfeld")
@@ -178,7 +185,7 @@ print(f"Grenze Spule: {grenze_spule}")
 
 print("-----------fit the data-----------")
 #fit the data
-x_fit_data2 = np.linspace(-40, 40, 200)
+x_fit_data2_r = np.linspace(-40, 40, 200)
 
 #fit the data
 popt, pcov = curve_fit(Bx, [x[0] for x in data_2_gesamt], [x[1] for x in data_2_gesamt], p0=[0.8, 3.7])
@@ -189,21 +196,30 @@ I_eff = 1.26
 R_eff = 3.89
 print(f"I_eff: {I_eff}, R_eff: {R_eff}")
 
-y_fit_data2 = [Bx(I_eff, R_eff, x) for x in x_fit_data2]
+
 
 print(f"B_max: {Bx(I_eff, R_eff, 0)}")
 
-x_max_negativ2 = -x_from_Bx(I_eff, R_eff, (22.7-0.058))
-x_max_positiv2 = x_from_Bx(I_eff, R_eff, (22.6-0.05))
+x_max_negativ2 = -x_from_Bx(I_eff, R_eff, (23.57))
+x_max_positiv2 = x_from_Bx(I_eff, R_eff, (23.57))
 
-data_grenzen2 = [(x_max_negativ, 0), (x_max_positiv, 0)]
+#data_grenzen2 = [(x_max_negativ, 0), (x_max_positiv, 0)]
 
 print(f"x_max_negativ: {x_max_negativ2}")
 print(f"x_max_positiv: {x_max_positiv2}")
 
+x_fit_data2 = []
+for set in x_fit_data2_r:
+    if set < -3.5 or set > 3.5:
+        x_fit_data2.append(set)
+
+y_fit_data2 = [Bx(I_eff, R_eff, x) for x in x_fit_data2]
+
 print("------------plot data------------")
 fig, ax = plt.subplots(figsize=(8, 8))
-plt.plot([x[0] for x in data_grenzen2], [x[1] for x in data_grenzen2], 'o', color="red", label="Grenzen des konst. Maximums")
+plt.axvline(x=-3.5, color="red")
+plt.axvline(x=3.5, color="red")
+#plt.plot([x[0] for x in data_grenzen2], [x[1] for x in data_grenzen2], 'o', color="red", label="Grenzen des konst. Maximums")
 plt.errorbar([x[0] for x in data_2_Feld], [x[1] for x in data_2_Feld],yerr=error_y_2_Feld, xerr=error_x_2_Feld, fmt='o', label="Magnetfeld")
 plt.errorbar([x[0] for x in data_2_grund], [x[1] for x in data_2_grund], yerr= error_y_2_grund, xerr=error_x_2_grund, fmt='o', label="Untergrundmessung")
 plt.errorbar([x[0] for x in data_2_gesamt], [x[1] for x in data_2_gesamt], yerr=error_y_2_gesamt, xerr=error_x_2_gesamt, fmt='o', label="Gesamtfeld")

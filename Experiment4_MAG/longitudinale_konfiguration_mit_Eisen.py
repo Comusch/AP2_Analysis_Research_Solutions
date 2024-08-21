@@ -74,7 +74,7 @@ print(f"Grenze Spule: {grenze_spule}")
 
 print("-----------fit the data-----------")
 #fit the data
-x_fit_data = np.linspace(-40, 40, 200)
+x_fit_data_r = np.linspace(-40, 40, 200)
 
 #fit the data
 popt, pcov = curve_fit(Bx, [x[0] for x in data_1_gesamt], [x[1] for x in data_1_gesamt], p0=[0.8, 3.7, 2.5])
@@ -88,9 +88,16 @@ R_eff = 3.75
 mu_r = 3.4
 print(f"I_eff: {I_eff}, R_eff: {R_eff}, mu_r: {mu_r}")
 
+B1_max = Bx(I_eff, R_eff, mu_r, 1.0037)
+
+x_fit_data = []
+for set in x_fit_data_r:
+    if set < -3.7 or set > 3.7:
+        x_fit_data.append(set)
+
 y_fit_data = [Bx(I_eff, R_eff, mu_r, x) for x in x_fit_data]
 
-B1_max = Bx(I_eff, R_eff, mu_r, 0)
+#data_grenzen1 = [(-1.0037, B1_max), (1.0037, B1_max)]
 
 print("-----------Calculation of B1_max and M-----------")
 
@@ -102,7 +109,9 @@ print(f"M_max: {M} A/m")
 print("------------plot data------------")
 
 fig, ax = plt.subplots(figsize=(8, 8))
-
+plt.axvline(x=-3.7, color="red")
+plt.axvline(x=3.7, color="red")
+#plt.plot([x[0] for x in data_grenzen1], [x[1] for x in data_grenzen1],"-", color="red", label="Maximumsplatto")
 plt.errorbar([x[0] for x in data_1_Feld], [x[1] for x in data_1_Feld], yerr=error_y_1_Feld, xerr=error_x_1_Feld, fmt='o', label="Magnetfeld")
 plt.errorbar([x[0] for x in data_1_grund], [x[1] for x in data_1_grund],yerr=error_y_1_grund, xerr=error_x_1_grund, fmt= 'o', label="Untergrundmessung")
 plt.errorbar([x[0] for x in data_1_gesamt], [x[1] for x in data_1_gesamt], yerr=error_y_1_gesamt, xerr=error_x_1_grund, fmt='o', label="Gesamtfeld")
@@ -168,7 +177,7 @@ print(data_2_gesamt)
 
 print("-----------fit the data-----------")
 #fit the data
-x_fit_data2 = np.linspace(-40, 40, 200)
+x_fit_data2_r = np.linspace(-40, 40, 400)
 
 #fit the data
 fit = curve_fit(Bx, [x[0] for x in data_2_gesamt], [x[1] for x in data_2_gesamt], p0=[0.8, 3.7, 2.5])
@@ -183,9 +192,18 @@ R_eff2 = 3.89
 mu_r2 = 3.05
 print(f"I_eff: {I_eff2}, R_eff: {R_eff2}, mu_r: {mu_r2}")
 
+x_fit_data2 = []
+for set in x_fit_data2_r:
+    if set < -3.5 or set > 3.5:
+        x_fit_data2.append(set)
+    else:
+        print(set)
+
 y_fit_data2 = [Bx(I_eff2, R_eff2, mu_r2, x) for x in x_fit_data2]
 
-B2_max = Bx(I_eff2, R_eff2, mu_r2, 0)
+B2_max = Bx(I_eff2, R_eff2, mu_r2, 0.9)
+
+#data_grenzen2 = [(-4.35, B2_max), (4.35, B2_max)]
 
 print("-----------Calculation of B2_max and M-----------")
 
@@ -199,6 +217,9 @@ print("------------plot data------------")
 
 fig, ax = plt.subplots(figsize=(8, 8))
 
+plt.axvline(x=-3.5, color="red")
+plt.axvline(x=3.5, color="red")
+#plt.plot([x[0] for x in data_grenzen2], [x[1] for x in data_grenzen2], color="red", label="Maximumsplatto")
 plt.errorbar([x[0] for x in data_2_Feld], [x[1] for x in data_2_Feld], yerr=error_y_2_Feld, xerr=error_x_2_Feld, fmt='o', label="Magnetfeld")
 plt.errorbar([x[0] for x in data_2_grund], [x[1] for x in data_2_grund], yerr=error_y_2_grund, xerr=error_x_2_Feld, fmt='o', label="Untergrundmessung")
 plt.errorbar([x[0] for x in data_2_gesamt], [x[1] for x in data_2_gesamt], yerr=error_y_2_gesamt, xerr=error_x_2_gesamt, fmt='o', label="Gesamtfeld")
