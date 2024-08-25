@@ -38,7 +38,7 @@ print(f"r_value: {r_value}")
 print(f"p_value: {p_value}")
 print(f"std_err: {std_err}")
 
-print(f"slope = delta = {-slope}")
+print(f"slope = delta = {-slope} +- {std_err}")
 
 
 time_fit = np.linspace(0, 112*10**(-6), 100)

@@ -31,8 +31,8 @@ def fit_func_phase(f, R_C):
 
 popt_phase, pcov_phase = opt.curve_fit(fit_func_phase, (np.array(data_phase)[:, 0]), (np.array(data_phase)[:, 1]))
 print(popt_phase)
-print(f"R_C um 10^3 größer: {popt_phase[0]}")
-print(f"u_R_C um 10^3 größer: {np.sqrt(pcov_phase[0][0])}")
+print(f"R_C um 10^3 größer: {popt_phase[0]} +- {pcov_phase[0]}")
+print(f"u_R_C um 10^3 größer: {pcov_phase[0][0]}")
 
 f_fit_phase = np.linspace(0.1, 100, 1000)
 phase_fit = fit_func_phase(f_fit_phase, popt_phase[0])
@@ -44,7 +44,7 @@ phase_fit_theo = fit_func_phase(f_fit_phase, theo_R_C)
 
 w_g_p = 1/popt_phase[0] *1/(2*np.pi)
 u_w_g_p = np.sqrt(pcov_phase[0][0])/popt_phase[0]**2 *1/(2*np.pi)
-print(f"w_g_p: {w_g_p}")
+print(f"w_g_p: {w_g_p} +- {u_w_g_p}")
 theo_w_g_p = 1/theo_R_C *1/(2*np.pi)
 u_theo_w_g_p = np.sqrt((u_theo_R_C/theo_R_C**2)**2) *1/(2*np.pi)
 print(f"Theoretical w_g_p: {theo_w_g_p} +- {u_theo_w_g_p}")
@@ -83,7 +83,7 @@ amplitude_fit_theo = fit_func(f_fit, theo_R_C)
 
 w_g_a = 1/popt[0] *1/(2*np.pi)
 u_w_g_a = np.sqrt(pcov[0][0])/popt[0]**2
-print(f"w_g_a: {w_g_a}")
+print(f"w_g_a: {w_g_a} +- {u_w_g_a}")
 theo_w_g_a = 1/theo_R_C *1/(2*np.pi)
 u_theo_w_g_a = np.sqrt((u_theo_R_C/theo_R_C**2)**2) *1/(2*np.pi)
 print(f"Theoretical w_g_a: {theo_w_g_a} +- {u_theo_w_g_a}")
