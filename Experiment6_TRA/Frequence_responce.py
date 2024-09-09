@@ -1,4 +1,3 @@
-from cProfile import label
 
 import Analysistools as an
 import numpy as np
@@ -17,7 +16,7 @@ for set in data_orignal:
        continue
     data_amplitude.append((set[0]*10**3, set[2]*10**3/set[1]))
 
-    data_phase.append((set[0]*10**3, 2*np.pi*set[0]*10**3*set[3]))
+    data_phase.append((set[0]*10**3, 2*np.pi-2*np.pi*set[0]*10**3*set[3]))
 
 print("---------plot the data------------")
 print("Plot amplitude:")
